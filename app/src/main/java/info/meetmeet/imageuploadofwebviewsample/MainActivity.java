@@ -50,16 +50,19 @@ public class MainActivity extends AppCompatActivity {
         mWebView.addJavascriptInterface(new WebViewJavaScriptInterface(this), "Native");
         mWebView.getSettings().setJavaScriptEnabled(true);
 
+        // Local file
         // Display the html file in the assets in WebView
-        AssetManager assetManager = getAssets();
-        try {
-            InputStream inputStream = assetManager.open(HTML_FILE_NAME, AssetManager.ACCESS_BUFFER);
-            String htmlInString = streamToString(inputStream);
-            inputStream.close();
-            mWebView.loadDataWithBaseURL(null, htmlInString, "text/html", UTF8, null);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        AssetManager assetManager = getAssets();
+//        try {
+//            InputStream inputStream = assetManager.open(HTML_FILE_NAME, AssetManager.ACCESS_BUFFER);
+//            String htmlInString = streamToString(inputStream);
+//            inputStream.close();
+//            mWebView.loadDataWithBaseURL(null, htmlInString, "text/html", UTF8, null);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        // Html URL
+        mWebView.loadUrl("http://49.212.135.31/image_upload/edit_profile.html");
     }
 
     @Override protected void onActivityResult(int requestCode, int resultCode, Intent data) {

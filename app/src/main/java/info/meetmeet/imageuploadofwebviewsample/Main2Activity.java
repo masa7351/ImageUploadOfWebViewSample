@@ -44,7 +44,7 @@ public class Main2Activity extends AppCompatActivity {
         webSettings.setJavaScriptEnabled(true);
         webSettings.setLoadWithOverviewMode(true);
         webSettings.setAllowFileAccess(true);
-        webView.setWebViewClient(new PQClient());
+//        webView.setWebViewClient(new PQClient());
         webView.setWebChromeClient(new PQChromeClient());
         //if SDK version is greater of 19 then activate hardware acceleration otherwise activate software acceleration
         if (Build.VERSION.SDK_INT >= 19) {
@@ -56,7 +56,8 @@ public class Main2Activity extends AppCompatActivity {
 
         //webView.loadUrl("file:///android_asset/index.html");
 //        webView.loadUrl("http://postimage.org/");
-        webView.loadUrl("http://49.212.135.31/image_upload/edit_profile.html");
+//        webView.loadUrl("http://49.212.135.31/image_upload/edit_profile.html");
+        webView.loadUrl("http://49.212.135.31/image_upload/sample.html");
 //        webView.loadUrl("http://code.matty-studio.jp/demo/HTML5/fileapi/preview.html");
     }
 
@@ -84,7 +85,7 @@ public class Main2Activity extends AppCompatActivity {
 
             // Check that the response is a good one
             if (resultCode == Activity.RESULT_OK) {
-                if (data == null) {
+                if (data == null || data.getData() == null) {
                     // If there is not data, then we may have taken a photo
                     if (mCameraPhotoPath != null) {
                         results = new Uri[]{Uri.parse(mCameraPhotoPath)};
@@ -283,58 +284,58 @@ public class Main2Activity extends AppCompatActivity {
     }
 
 
-    public class PQClient extends WebViewClient {
-        ProgressDialog progressDialog;
-
-        public boolean shouldOverrideUrlLoading(WebView view, String url) {
-
-            // If url contains mailto link then open Mail Intent
-            if (url.contains("mailto:")) {
-
-                // Could be cleverer and use a regex
-                //Open links in new browser
-                view.getContext().startActivity(
-                        new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-
-                // Here we can open new activity
-
-                return true;
-
-            }else {
-
-                // Stay within this webview and load url
-                view.loadUrl(url);
-                return true;
-            }
-        }
-
-        //Show loader on url load
-        public void onPageStarted(WebView view, String url, Bitmap favicon) {
-
-            // Then show progress  Dialog
-            // in standard case YourActivity.this
-            if (progressDialog == null) {
-                progressDialog = new ProgressDialog(Main2Activity.this);
-                progressDialog.setMessage("Loading...");
-                progressDialog.show();
-            }
-        }
-
-        // Called when all page resources loaded
-        public void onPageFinished(WebView view, String url) {
-            webView.loadUrl("javascript:(function(){ "+
-                    "document.getElementById('android-app').style.display='none';})()");
-
-            try {
-                // Close progressDialog
-                if (progressDialog.isShowing()) {
-                    progressDialog.dismiss();
-                    progressDialog = null;
-                }
-            } catch (Exception exception) {
-                exception.printStackTrace();
-            }
-        }
-    }
+//    public class PQClient extends WebViewClient {
+//        ProgressDialog progressDialog;
+//
+//        public boolean shouldOverrideUrlLoading(WebView view, String url) {
+//
+//            // If url contains mailto link then open Mail Intent
+//            if (url.contains("mailto:")) {
+//
+//                // Could be cleverer and use a regex
+//                //Open links in new browser
+//                view.getContext().startActivity(
+//                        new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+//
+//                // Here we can open new activity
+//
+//                return true;
+//
+//            }else {
+//
+//                // Stay within this webview and load url
+//                view.loadUrl(url);
+//                return true;
+//            }
+//        }
+//
+//        //Show loader on url load
+//        public void onPageStarted(WebView view, String url, Bitmap favicon) {
+//
+//            // Then show progress  Dialog
+//            // in standard case YourActivity.this
+//            if (progressDialog == null) {
+//                progressDialog = new ProgressDialog(Main2Activity.this);
+//                progressDialog.setMessage("Loading...");
+//                progressDialog.show();
+//            }
+//        }
+//
+//        // Called when all page resources loaded
+//        public void onPageFinished(WebView view, String url) {
+//            webView.loadUrl("javascript:(function(){ "+
+//                    "document.getElementById('android-app').style.display='none';})()");
+//
+//            try {
+//                // Close progressDialog
+//                if (progressDialog.isShowing()) {
+//                    progressDialog.dismiss();
+//                    progressDialog = null;
+//                }
+//            } catch (Exception exception) {
+//                exception.printStackTrace();
+//            }
+//        }
+//    }
 
 }
